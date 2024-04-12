@@ -1,42 +1,39 @@
+
 <template>
     <div>
-      <h1>Add Product</h1>
-      <form @submit.prevent="addProduct">
-        <div>
-          <label for="name">Name:</label>
-          <input type="text" v-model="name" required />
-        </div>
-        <div>
-          <label for="description">Description:</label>
-          <input type="text" v-model="description" required />
-        </div>
-        <div>
-          <label for="price">Price:</label>
-          <input type="number" v-model="price" required />
-        </div>
-        <button type="submit">Add</button>
-      </form>
+      <h1>Product List</h1>
+      <router-link to="/add">Add Product</router-link>
+      <ul>
+        <li v-for="(product, index) in products" :key="product.id">
+          <div>
+            <h3>Name: {{ product.name }}</h3>
+            <p>Description: {{ product.description }}</p>
+            <p>Price: {{ product.price }}</p>
+            <button @click="editProduct(index)">Edit</button>
+            <button @click="deleteProduct(index)">Delete</button>
+          </div>
+        </li>
+      </ul>
     </div>
   </template>
   
   <script>
+  
   export default {
     data() {
       return {
-        name: '',
-        description: '',
-        price: 0
+        products: []
       };
     },
+    created() {
+      this.products = this.$store.state.products;
+    },
     methods: {
-      addProduct() {
-        const newProduct = {
-          name: this.name,
-          description: this.description,
-          price: this.price
-        };
-        this.$store.dispatch('addProduct', newProduct);
-        this.$router.push('/');
+        editProduct(index) {
+            this.$router.push(`/edit/${index}`);
+        },
+      deleteProduct(index) {
+        this.$store.dispatch('deleteProduct', index);
       }
     }
   };
