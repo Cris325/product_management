@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Edit Product</h1>
+    <h1>Update Product</h1>
     <form @submit.prevent="updateProduct">
       <div>
         <label for="name">Name:</label>
