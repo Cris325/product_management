@@ -26,7 +26,7 @@
 export default {
   data() {
     return {
-      //Lists of product
+      //List of products
       products: [
         { name: 'Vanilla', description: 'Classic flavor with sweet, smooth, and creamy taste.', price: 79 },
         { name: 'Chocolate', description: 'Rich and indulgent flavor with deep cocoa notes.', price: 79 },
@@ -38,6 +38,8 @@ export default {
         { name: 'Matcha', description: 'Green tea ice cream with smooth, earthy flavor and sweetness.', price: 99 },
         { name: 'Rocky Road', description: 'Chocolate ice cream with marshmallows and nuts.', price: 99 },
         { name: 'Pistachio', description: 'Nutty, slightly sweet flavor with subtle green hue.', price: 99 },
+        { name: 'Dulce de Leche', description: 'Sweet, caramel-like ice cream with a rich, creamy texture.', price: 109 },
+        { name: 'Gold Leaf Vanilla', description: 'Premium vanilla ice cream topped with edible gold leaf for a luxurious touch.', price: 109 },
       ]
     };
   }
