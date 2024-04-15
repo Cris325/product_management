@@ -21,7 +21,11 @@
   export default {
     data() {
       return {
-        products: []
+        //Lists of products
+        products: [
+        { id: 1, name: 'Product 1', description: 'Description 1', price: 10.00 },
+        { id: 2, name: 'Product 2', description: 'Description 2', price: 20.00 },
+        ]
       };
     },
     created() {
