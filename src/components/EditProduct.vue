@@ -23,27 +23,41 @@
 export default {
   data() {
     return {
+      id: null,
       name: '',
       description: '',
       price: 0
     };
   },
   created() {
-    const productIndex = this.$route.params.id;
-    const product = this.$store.state.products[productIndex];
-    this.name = product.name;
-    this.description = product.description;
-    this.price = product.price;
+    this.fetchProduct();
   },
   methods: {
-    updateProduct() {
+    fetchProduct() {
       const productIndex = this.$route.params.id;
+      // Ensure the index is a number and within bounds
+      if (isNaN(productIndex) || productIndex >= this.$store.state.products.length || productIndex < 0) {
+        alert("Product not found.");
+        this.$router.push('/');
+        return;
+      }
+      const product = this.$store.state.products[productIndex];
+      if (product) {
+        this.id = productIndex;
+        this.name = product.name;
+        this.description = product.description;
+        this.price = product.price;
+      } else {
+        this.$router.push('/');
+      }
+    },
+    updateProduct() {
       const updatedProduct = {
         name: this.name,
         description: this.description,
         price: parseFloat(this.price)
       };
-      this.$store.dispatch('updateProduct', { index: productIndex, product: updatedProduct });
+      this.$store.dispatch('updateProduct', { index: this.id, product: updatedProduct });
       this.$router.push('/');
     }
   }

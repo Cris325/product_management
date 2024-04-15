@@ -1,5 +1,4 @@
 import { createStore } from 'vuex'
-import Vue from 'vue';
 
 export default createStore({
     state: {
@@ -10,7 +9,7 @@ export default createStore({
             state.products.push(product);
         },
         updateProduct(state, { index, product }) {
-            Vue.set(state.products, index, product);
+            state.products[index] = product;
         },
         deleteProduct(state, index) {
             state.products.splice(index, 1);

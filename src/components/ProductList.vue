@@ -4,9 +4,7 @@
       <!-- Title -->
       <h1>Product List</h1> 
       <!-- Add, Edit, Delete Button -->
-      <router-link to="/add">Add Product</router-link>
-      <button @click="editProduct(index)">Edit</button>
-      <button @click="deleteProduct(index)">Delete</button>
+      <button @click="addProduct" class="add-product">Add Product</button>
     </div>
 
     <table class="center-table">
@@ -14,11 +12,14 @@
         <th>Name</th>
         <th>Description</th>
         <th>Price</th>
+        <th colspan="2">Action</th>
       </tr>
       <tr v-for="(product, index) in products" :key="index" class="product">
         <td class="product-name">{{ product.name }}</td>
         <td class="product-description">{{ product.description }}</td>
         <td class="product-price">$ {{ product.price }}</td>
+        <td><button @click="editProduct(index)" class="edit-product">Edit</button></td>
+        <td><button @click="deleteProduct(index)" class="delete-product">Delete</button></td>
       </tr>
     </table>
   </div>
@@ -44,6 +45,20 @@ export default {
         { name: 'Gold Leaf Vanilla', description: 'Premium vanilla ice cream topped with edible gold leaf for a luxurious touch.', price: 109 },
       ]
     };
+  },
+  created() {
+    this.products = this.$store.state.products;
+  },
+  methods: {
+    addProduct() {
+      this.$router.push('/add');
+    },
+    editProduct(index) {
+        this.$router.push(`/edit/${index}`);
+    },
+    deleteProduct(index) {
+      this.$store.dispatch('deleteProduct', index);
+    }
   }
 };
 </script>
@@ -53,6 +68,7 @@ export default {
   margin: auto;
   border: 1px ;
   border-collapse: collapse;
+  min-width: 50%;
 }
 
 table th {
@@ -80,5 +96,13 @@ table td {
 
 table td:hover {
   background-color: plum;
+}
+
+.product-name, .product-description {
+  text-align: center;
+}
+
+.product-price {
+  text-align: right;
 }
 </style>
