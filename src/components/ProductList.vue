@@ -3,6 +3,7 @@
     <div>
       <!-- Title -->
       <h1>Product List</h1> 
+      <!-- Add, Edit, Delete Button -->
       <router-link to="/add">Add Product</router-link>
       <button @click="editProduct(index)">Edit</button>
       <button @click="deleteProduct(index)">Delete</button>
