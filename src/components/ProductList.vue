@@ -1,7 +1,8 @@
 <template>
   <div class="product-list">
     <div>
-      <h1>Product List</h1>
+      <!-- Title -->
+      <h1>Product List</h1> 
       <router-link to="/add">Add Product</router-link>
       <button @click="editProduct(index)">Edit</button>
       <button @click="deleteProduct(index)">Delete</button>
