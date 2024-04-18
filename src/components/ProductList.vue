@@ -1,143 +1,136 @@
 <template>
-  <div class="product-list">
+<div class="product-list">
     <div>
-      <!-- Title -->
-      <h1>Product List</h1>
+        <!-- Title -->
+        <h1>Product List</h1>
     </div>
 
     <table class="center-table">
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th colspan="2">Action</th>
-      </tr>
-      <transition-group name="fade">
-        <tr v-for="(product, index) in products" :key="index" class="product">
-          <td class="product-name">{{ product.name }}</td>
-          <td class="product-description">{{ product.description }}</td>
-          <td class="product-price">$ {{ product.price }}</td>
-          <td><button @click="editProduct(index)" class="edit-product">Edit</button></td>
-          <td><button @click="confirmDelete(index)" class="delete-product">Delete</button></td>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th colspan="2">Action</th>
         </tr>
-      </transition-group>
+        <transition-group name="slide-fade">
+            <tr v-for="(product, index) in products" :key="index" class="product">
+                <td class="product-name">{{ product.name }}</td>
+                <td class="product-description">{{ product.description }}</td>
+                <td class="product-price">$ {{ product.price }}</td>
+                <td><button @click="editProduct(index)" class="edit-product">Edit</button></td>
+                <td><button @click="confirmDelete(index)" class="delete-product">Delete</button></td>
+            </tr>
+        </transition-group>
     </table>
     <br>
     <br>
-    <div class="container">
-      <button @click="showAddForm" class="add-product">Add Product</button>
+    <div class="add-container">
+        <button @click="showAddForm" class="add-product">Add Product</button>
     </div>
 
-    <!-- Add Product Form -->
+    <!-- Add and Edit Product Form -->
     <transition name="fade" @after-enter="afterTransition" @after-leave="afterTransition">
-      <div v-if="isAddingProduct || isEditingProduct" class="add-product-form">
-        <h2>{{ isEditingProduct ? 'Edit Product' : 'Add Product' }}</h2>
-        <form @submit.prevent="isEditingProduct ? updateProduct() : addNewProduct()">
-          <div>
-            <label for="productName">Product Name:</label>
-            <input type="text" id="productName" v-model="formData.name" required>
-          </div>
-          <div>
-            <label for="productDescription">Product Description:</label>
-            <textarea id="productDescription" v-model="formData.description" required></textarea>
-          </div>
-          <div>
-            <label for="productPrice">Product Price:</label>
-            <input type="number" id="productPrice" v-model.number="formData.price" required>
-          </div>
-          <div class="buttons">
-            <button type="submit">{{ isEditingProduct ? 'Update' : 'Add' }}</button>
-            <button type="button" @click="cancelAction">{{ isEditingProduct ? 'Cancel Edit' : 'Cancel Add' }}</button>
-          </div>
-        </form>
-      </div>
+        <div v-if="isAddingProduct || isEditingProduct" class="add-product-form">
+            <div class="form-group">
+                <div class="container">
+                    <h1>{{ isEditingProduct ? 'Edit Product' : 'Add Product' }}</h1>
+                </div>
+            </div>
+
+            <form @submit.prevent="isEditingProduct ? updateProduct() : addNewProduct()">
+                <div class="form-group">
+                    <label for="productName" class="label">Product Name:</label>
+                    <input type="text" id="productName" class="input" v-model="formData.name" required>
+                </div>
+                <div class="form-group">
+                    <label for="productDescription" class="label">Product Description:</label>
+                    <textarea id="productDescription" class="input" v-model="formData.description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="productPrice" class="label">Product Price:</label>
+                    <input type="number" id="productPrice" class="input" v-model.number="formData.price" required>
+                </div>
+                <div class="buttons">
+                    <button type="submit" class="btn">{{ isEditingProduct ? 'Update' : 'Add' }}</button>
+                    <button type="button" class="btn" @click="cancelAction">{{ isEditingProduct ? 'Cancel Edit' : 'Cancel Add' }}</button>
+                </div>
+            </form>
+        </div>
     </transition>
-  </div>
+</div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      products: [],
-      isAddingProduct: false,
-      isEditingProduct: false,
-      formData: {
-        name: '',
-        description: '',
-        price: null
-      },
-      editedIndex: null
-    };
-  },
-  created() {
-    this.products = this.$store.state.products;
-  },
-  methods: {
-    addProduct() {
-      this.$router.push('/add');
+    data() {
+        return {
+            products: [],
+            isAddingProduct: false,
+            isEditingProduct: false,
+            formData: {
+                name: '',
+                description: '',
+                price: null
+            },
+            editedIndex: null
+        };
     },
-    editProduct(index) {
-      this.isEditingProduct = true;
-      this.formData = {...this.products[index]};
-      this.editedIndex = index;
+    created() {
+        this.products = this.$store.state.products;
     },
-    confirmDelete(index) {
-      if (confirm('Are you sure you want to delete this product?')) {
-        this.deleteProduct(index);
-      }
+    methods: {
+        showAddForm() {
+            this.isAddingProduct = true;
+        },
+        editProduct(index) {
+            this.isEditingProduct = true;
+            this.formData = {
+                ...this.products[index]
+            };
+            this.editedIndex = index;
+        },
+        confirmDelete(index) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                this.deleteProduct(index);
+            }
+        },
+        addNewProduct() {
+            this.$store.dispatch('addProduct', this.formData);
+            this.cancelAction();
+        },
+        updateProduct() {
+            this.$store.dispatch('updateProduct', {
+                index: this.editedIndex,
+                product: this.formData
+            });
+            this.cancelAction();
+        },
+        cancelAction() {
+            this.isAddingProduct = false;
+            this.isEditingProduct = false;
+            this.resetForm();
+        },
+        resetForm() {
+            this.formData = {
+                name: '',
+                description: '',
+                price: null,
+            };
+            this.editedIndex = null;
+        },
+        afterTransition() {
+            if (!this.isAddingProduct && !this.isEditingProduct) {
+                this.resetForm();
+            }
+        },
+        deleteProduct(index) {
+            this.$store.dispatch('deleteProduct', index);
+        },
     },
-    deleteProduct(index) {
-      this.$store.dispatch('deleteProduct', index);
-    },
-    showAddForm() {
-      this.isAddingProduct = true;
-    },
-    addNewProduct() {
-      if (this.formData.name && this.formData.description && this.formData.price) {
-        this.products.push({...this.formData});
-        // Delay setting isAddingProduct to false until after transition
-        setTimeout(() => {
-          this.isAddingProduct = false;
-        }, 500); // Adjust the timeout to match your transition duration
-        this.resetForm();
-      } else {
-        alert('Please fill in all fields.');
-      }
-    },
-    updateProduct() {
-      if (this.formData.name && this.formData.description && this.formData.price) {
-        this.products.splice(this.editedIndex, 1, {...this.formData});
-        // Delay setting isEditingProduct to false until after transition
-        setTimeout(() => {
-          this.isEditingProduct = false;
-        }, 500); // Adjust the timeout to match your transition duration
-        this.resetForm();
-      } else {
-        alert('Please fill in all fields.');
-      }
-    },
-    cancelAction() {
-      this.isAddingProduct = false;
-      this.isEditingProduct = false;
-      this.resetForm();
-    },
-    resetForm() {
-      this.formData = { name: '', description: '', price: null };
-      this.editedIndex = null;
-    },
-    afterTransition() {
-      // Clear form data if transition is complete
-      if (!this.isAddingProduct && !this.isEditingProduct) {
-        this.resetForm();
-      }
-    }
-  }
 };
 </script>
 
 <style scoped>
-
 h1 {
     text-align: center;
     font-weight: bold;
@@ -158,8 +151,8 @@ button:hover {
     background-color: #2c8350;
 }
 
-.container {
-  text-align: center;
+.add-container {
+    text-align: center;
 }
 
 .center-table {
@@ -184,7 +177,7 @@ table td {
     text-align: center;
     background-color: rgb(219, 243, 245);
     font-family: arial;
-    font-weight: 300;       
+    font-weight: 300;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 10px;
@@ -206,76 +199,87 @@ table td:hover {
 }
 
 .add-product-form {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+    max-width: 500px;
+    margin: auto;
+    background-color: rgb(219, 243, 245);
+    padding: 20px;
+    border-radius: 10px;
 }
 
-.add-product-form h2 {
-  text-align: center;
+.container {
+    max-width: 200px;
+    margin: auto;
+    background-color: aquamarine;
+    padding: 10px;
+    border-radius: 5px;
 }
 
-.add-product-form form {
-  display: flex;
-  flex-direction: column;
+.title {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.add-product-form form div {
-  margin-bottom: 10px;
+.form {
+    display: flex;
+    flex-direction: column;
 }
 
-.add-product-form form div label {
-  font-weight: bold;
+.form-group {
+    margin-bottom: 15px;
 }
 
-.add-product-form form div input,
-.add-product-form form div textarea {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+.label {
+    font-weight: bold;
 }
 
-.add-product-form form .buttons {
-  display: flex;
-  justify-content: space-between;
+.input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    /* Ensure padding is included in width */
 }
 
-.add-product-form form .buttons button {
-  padding: 8px 20px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
+.btn {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #32c06d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    /* Ensure padding is included in width */
 }
 
-.add-product-form form .buttons button[type="submit"] {
-  background-color: #32c06d;
-  color: #fff;
+.btn:hover {
+    background-color: #2c8350;
 }
 
-.add-product-form form .buttons button[type="submit"]:hover {
-  background-color: #2c8350;
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
 }
 
-.add-product-form form .buttons button[type="button"] {
-  background-color: #ccc;
-  color: #333;
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
-.add-product-form form .buttons button[type="button"]:hover {
-  background-color: #bbb;
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+    transition: opacity 0.5s;
 }
 
 .fade-enter,
 .fade-leave-to {
-  opacity: 0;
+    opacity: 0;
 }
-
 </style>
