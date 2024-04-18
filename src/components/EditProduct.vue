@@ -3,13 +3,14 @@
 <br>
 <div class="edit-product">
     <transition name="zoom">
-        <form @submit.prevent="updateProduct" class="form">
+        <form @submit.prevent="editProduct" class="form">
             <div class="form-group">
                 <div class="container">
                     <h1 class="title">Edit Product</h1>
                 </div>
             </div>
 
+            <!-- encapsulating textfields in a div with same class name for optimized configuration of the user interface  -->
             <div class="form-group">
                 <label for="name" class="label">Name:</label>
                 <input type="text" v-model="name" required class="input" />
@@ -22,11 +23,15 @@
                 <label for="price" class="label">Price:</label>
                 <input type="number" v-model="price" required class="input" />
             </div>
+
+            <!-- encapsulating buttons in a div for an organized designing  -->
             <div class="form-group">
             <button type="submit" class="btn">Update</button>
             <button type="button" class="btn cancel-btn" @click="cancelEdit">Cancel</button>
             </div>
         </form>
+
+        <!-- improvising transition of each in every action on the EditProduct page for more interactive actions  -->
     </transition>
 </div>
 </template>
@@ -47,12 +52,14 @@ export default {
     methods: {
         fetchProduct() {
             var productIndex = this.$route.params.id;
-            // Ensure the index is a number and within bounds
+            //checking if the item selected is present on the list of Id
             if (isNaN(productIndex) || productIndex >= this.$store.state.products.length || productIndex < 0) {
                 alert("Product not found.");
                 this.$router.push('/');
                 return;
             }
+
+            //getting the data of selected product
             var product = this.$store.state.products[productIndex];
             if (product) {
                 this.id = productIndex;
@@ -63,13 +70,15 @@ export default {
                 this.$router.push('/');
             }
         },
-        updateProduct() {
+        //setting the updated product data
+        editProduct() {
             var updatedProduct = {
                 name: this.name,
                 description: this.description,
                 price: parseFloat(this.price)
             };
 
+            //avoiding invalid input data
             if (!updatedProduct.name || !updatedProduct.description || isNaN(updatedProduct.price) || updatedProduct.price < 0) {
                 alert('Please enter valid product details.');
                 return;
