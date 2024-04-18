@@ -141,6 +141,10 @@ button {
 
 }
 
+button:hover {
+    background-color: #2c8350;
+}
+
 .container {
   text-align: center;
 }
@@ -167,7 +171,7 @@ table td {
     text-align: center;
     background-color: rgb(219, 243, 245);
     font-family: arial;
-    font-weight: 300;
+    font-weight: 300;       
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 10px;
@@ -176,7 +180,7 @@ table td {
 }
 
 table td:hover {
-    background-color: plum;
+    background-color: rgb(187, 207, 209);
 }
 
 .product-name,

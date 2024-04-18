@@ -5,7 +5,10 @@
     <transition name="slide">
         <form @submit.prevent="addProduct" class="form">
             <div class="form-group">
-                <h1 class="title">Add Product</h1>
+                <div class="container">
+                    <h1 class="title">Add Product</h1>
+                </div>
+              
             </div>
             <div class="form-group">
                 <label for="name" class="label">Name:</label>
@@ -21,6 +24,7 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="btn">Add</button>
+                <button type="button" class="btn cancel-btn" @click="cancel">Cancel</button>
             </div>
         </form>
     </transition>
@@ -45,6 +49,10 @@ export default {
             };
             this.$store.dispatch('addProduct', newProduct);
             this.$router.push('/');
+        },
+
+        cancel() {
+            this.$router.push('/');
         }
     }
 };
@@ -54,9 +62,17 @@ export default {
 .add-product {
     max-width: 400px;
     margin: auto;
-    background-color: #c2e6fc;
+    background-color: rgb(219, 243, 245);
     padding: 20px;
     border-radius: 10px;
+}
+
+.container {
+    max-width: 200px;
+    margin: auto;
+    background-color: aquamarine;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .title {
@@ -87,19 +103,21 @@ export default {
 }
 
 .btn {
+    font-size: 16px;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #32c06d;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
     box-sizing: border-box;
+    margin-bottom: 10px;
     /* Ensure padding is included in width */
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #2c8350;
 }
 
 .slide-enter-active,
