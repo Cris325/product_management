@@ -1,7 +1,7 @@
 <template>
 <div>
     <h1>Edit Product</h1>
-    <transition-group name="fade">
+    <transition name="zoom">
         <form @submit.prevent="updateProduct">
             <div>
                 <label for="name">Name:</label>
@@ -18,7 +18,7 @@
             <button type="submit">Update</button>
             <button type="button" @click="cancelEdit">Cancel</button>
         </form>
-    </transition-group>
+    </transition>
 </div>
 </template>
 
@@ -80,13 +80,14 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.5s;
+.zoom-enter-active,
+.zoom-leave-active {
+    transition: transform 0.5s, opacity 0.5s;
 }
 
-.fade-enter,
-.fade-leave-to {
+.zoom-enter,
+.zoom-leave-to {
     opacity: 0;
+    transform: scale(0.8);
 }
 </style>

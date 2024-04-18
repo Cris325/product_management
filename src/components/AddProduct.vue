@@ -2,26 +2,28 @@
 <br>
 <br>
 <div class="add-product">
-    <form @submit.prevent="addProduct" class="form">
-        <div class="form-group">
-            <h1 class="title">Add Product</h1>
-        </div>
-        <div class="form-group">
-            <label for="name" class="label">Name:</label>
-            <input type="text" v-model="name" required class="input" />
-        </div>
-        <div class="form-group">
-            <label for="description" class="label">Description:</label>
-            <input type="text" v-model="description" required class="input" />
-        </div>
-        <div class="form-group">
-            <label for="price" class="label">Price:</label>
-            <input type="number" v-model="price" step="0.01" required class="input" />
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn">Add</button>
-        </div>
-    </form>
+    <transition name="slide">
+        <form @submit.prevent="addProduct" class="form">
+            <div class="form-group">
+                <h1 class="title">Add Product</h1>
+            </div>
+            <div class="form-group">
+                <label for="name" class="label">Name:</label>
+                <input type="text" v-model="name" required class="input" />
+            </div>
+            <div class="form-group">
+                <label for="description" class="label">Description:</label>
+                <input type="text" v-model="description" required class="input" />
+            </div>
+            <div class="form-group">
+                <label for="price" class="label">Price:</label>
+                <input type="number" v-model="price" step="0.01" required class="input" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn">Add</button>
+            </div>
+        </form>
+    </transition>
 </div>
 </template>
 
@@ -100,13 +102,14 @@ export default {
     background-color: #0056b3;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.5s;
+.slide-enter-active,
+.slide-leave-active {
+    transition: transform 0.5s, opacity 0.5s;
 }
 
-.fade-enter,
-.fade-leave-to {
+.slide-enter,
+.slide-leave-to {
     opacity: 0;
+    transform: translateY(-20px);
 }
 </style>
