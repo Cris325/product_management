@@ -2,6 +2,8 @@
 <br>
 <br>
 <div class="edit-product">
+
+    <!-- improvising transition of each in every action on the EditProduct page for more interactive actions  -->
     <transition name="zoom">
         <form @submit.prevent="editProduct" class="form">
             <div class="form-group">
@@ -30,8 +32,6 @@
             <button type="button" class="btn cancel-btn" @click="cancelEdit">Cancel</button>
             </div>
         </form>
-
-        <!-- improvising transition of each in every action on the EditProduct page for more interactive actions  -->
     </transition>
 </div>
 </template>
