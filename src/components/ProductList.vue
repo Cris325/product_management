@@ -4,7 +4,7 @@
         <!-- Title -->
         <h1>Product List</h1>
         <!-- Add, Edit, Delete Button -->
-        <button @click="addProduct" class="add-product">Add Product</button>
+       
     </div>
 
     <table class="center-table">
@@ -24,6 +24,12 @@
             </tr>
         </transition-group>
     </table>
+    <br>
+    <br>
+    <div class="container">
+        <button @click="addProduct" class="add-product">Add Product</button>
+    </div>
+           
 </div>
 </template>
 
@@ -118,6 +124,27 @@ export default {
 </script>
 
 <style scoped>
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+}
+
+button {
+    background-color: #32c06d;
+    border: white;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+
+}
+
+.container {
+  text-align: center;
+}
+
 .center-table {
     margin: auto;
     border: 1px;
@@ -138,7 +165,7 @@ table th {
 
 table td {
     text-align: center;
-    background-color: pink;
+    background-color: rgb(219, 243, 245);
     font-family: arial;
     font-weight: 300;
     padding-left: 10px;
