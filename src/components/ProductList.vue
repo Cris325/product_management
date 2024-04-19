@@ -81,9 +81,11 @@ export default {
         this.products = this.$store.state.products;
     },
     methods: {
+        // showing the add form
         showAddForm() {
             this.isAddingProduct = true;
         },
+        // editing the product
         editProduct(index) {
             this.isEditingProduct = true;
             this.formData = {
@@ -91,15 +93,18 @@ export default {
             };
             this.editedIndex = index;
         },
+        // delete confirmation
         confirmDelete(index) {
             if (confirm('Are you sure you want to delete this product?')) {
                 this.deleteProduct(index);
             }
         },
+        // adding the new product
         addNewProduct() {
             this.$store.dispatch('addProduct', this.formData);
             this.cancelAction();
         },
+        // editing the new product
         updateProduct() {
             this.$store.dispatch('updateProduct', {
                 index: this.editedIndex,
@@ -107,11 +112,13 @@ export default {
             });
             this.cancelAction();
         },
+        // canceling
         cancelAction() {
             this.isAddingProduct = false;
             this.isEditingProduct = false;
             this.resetForm();
         },
+        // resting the form
         resetForm() {
             this.formData = {
                 name: '',
@@ -120,11 +127,13 @@ export default {
             };
             this.editedIndex = null;
         },
+        // afterward
         afterTransition() {
             if (!this.isAddingProduct && !this.isEditingProduct) {
                 this.resetForm();
             }
         },
+        // deleting the product
         deleteProduct(index) {
             this.$store.dispatch('deleteProduct', index);
         },
@@ -138,6 +147,7 @@ export default {
         font-weight: bold;
     }
     
+    /* designing the button */
     button {
         background-color: #32c06d;
         border: white;
@@ -164,6 +174,7 @@ export default {
     border: 1px solid black; /* Add border to the entire table */
 }
 
+/* designing the table */
 table th {
     text-align: center;
     background-color: aquamarine;
