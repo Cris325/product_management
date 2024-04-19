@@ -131,35 +131,35 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-    text-align: center;
-    font-weight: bold;
-}
-
-button {
-    background-color: #32c06d;
-    border: white;
-    color: white;
-    padding: 8px 15px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-
-}
-
-button:hover {
-    background-color: #2c8350;
-}
-
-.add-container {
-    text-align: center;
-}
-
-.center-table {
+    h1 {
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    button {
+        background-color: #32c06d;
+        border: white;
+        color: white;
+        padding: 8px 15px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+    
+    }
+    
+    button:hover {
+        background-color: #2c8350;
+    }
+    
+    .add-container {
+        text-align: center;
+    }
+    
+    .center-table {
     margin: auto;
-    border: 1px;
     border-collapse: collapse;
     min-width: 50%;
+    border: 1px solid black; /* Add border to the entire table */
 }
 
 table th {
@@ -171,6 +171,7 @@ table th {
     padding-right: 12px;
     padding-top: 12px;
     padding-bottom: 12px;
+    border: 1px solid black; /* Add border to table headers */
 }
 
 table td {
@@ -182,104 +183,105 @@ table td {
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
-
+    border: 1px solid black; /* Add border to table cells */
 }
 
 table td:hover {
     background-color: rgb(187, 207, 209);
 }
 
-.product-name,
-.product-description {
-    text-align: center;
-}
-
-.product-price {
-    text-align: right;
-}
-
-.add-product-form {
-    max-width: 500px;
-    margin: auto;
-    background-color: rgb(219, 243, 245);
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.container {
-    max-width: 200px;
-    margin: auto;
-    background-color: aquamarine;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.title {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.label {
-    font-weight: bold;
-}
-
-.input {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 100%;
-    box-sizing: border-box;
-    /* Ensure padding is included in width */
-}
-
-.btn {
-    font-size: 16px;
-    padding: 10px 20px;
-    background-color: #32c06d;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    /* Ensure padding is included in width */
-}
-
-.btn:hover {
-    background-color: #2c8350;
-}
-
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to {
-    opacity: 0;
-}
-</style>
+    
+    .product-name,
+    .product-description {
+        text-align: center;
+    }
+    
+    .product-price {
+        text-align: right;
+    }
+    
+    .add-product-form {
+        max-width: 500px;
+        margin: auto;
+        background-color: rgb(219, 243, 245);
+        padding: 20px;
+        border-radius: 10px;
+    }
+    
+    .container {
+        max-width: 200px;
+        margin: auto;
+        background-color: aquamarine;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
+    .title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .label {
+        font-weight: bold;
+    }
+    
+    .input {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 100%;
+        box-sizing: border-box;
+        /* Ensure padding is included in width */
+    }
+    
+    .btn {
+        font-size: 16px;
+        padding: 10px 20px;
+        background-color: #32c06d;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        /* Ensure padding is included in width */
+    }
+    
+    .btn:hover {
+        background-color: #2c8350;
+    }
+    
+    .slide-fade-enter-active {
+      transition: all 0.3s ease-out;
+    }
+    
+    .slide-fade-leave-active {
+      transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+    }
+    
+    .slide-fade-enter-from,
+    .slide-fade-leave-to {
+      transform: translateX(20px);
+      opacity: 0;
+    }
+    
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity 0.5s;
+    }
+    
+    .fade-enter,
+    .fade-leave-to {
+        opacity: 0;
+    }
+    </style>
