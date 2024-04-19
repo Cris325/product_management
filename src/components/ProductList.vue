@@ -150,7 +150,7 @@ export default {
     }
     
     button:hover {
-        background-color: #2c8350;
+        background-color: #2c8350; /* button hover */
     }
     
     .add-container {
@@ -189,7 +189,7 @@ table td {
 }
 
 table td:hover {
-    background-color: rgb(187, 207, 209);
+    background-color: rgb(187, 207, 209); /* table hover */
 }
 
     
@@ -258,7 +258,7 @@ table td:hover {
     }
     
     .btn:hover {
-        background-color: #2c8350;
+        background-color: #2c8350; /* button hover */
     }
     
     .slide-fade-enter-active {
