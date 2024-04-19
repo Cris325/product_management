@@ -12,9 +12,9 @@
             <th>Price</th>
             <th colspan="2">Action</th>
         </tr>
-        <transition-group name="slide-fade">
+        <transition-group name="slide-fade"> /* Vue transition group that applies a transition effect */
             <tr v-for="(product, index) in products" :key="index" class="product">
-                <td class="product-name">{{ product.name }}</td>
+                <td class="product-name">{{ product.name }}</td> /*  defines table data cells */
                 <td class="product-description">{{ product.description }}</td>
                 <td class="product-price">$ {{ product.price }}</td>
                 <td><button @click="editProduct(index)" class="edit-product">Edit</button></td>
@@ -239,8 +239,7 @@ table td:hover {
         border-radius: 5px;
         border: 1px solid #ccc;
         width: 100%;
-        box-sizing: border-box;
-        /* Ensure padding is included in width */
+        box-sizing: border-box;  /* Ensure padding is included in width */
     }
     
     .btn {
@@ -253,8 +252,7 @@ table td:hover {
         cursor: pointer;
         width: 100%;
         box-sizing: border-box;
-        margin-bottom: 10px;
-        /* Ensure padding is included in width */
+        margin-bottom: 10px;   /* Ensure padding is included in width */
     }
     
     .btn:hover {
