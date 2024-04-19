@@ -12,9 +12,11 @@
             <th>Price</th>
             <th colspan="2">Action</th>
         </tr>
-        <transition-group name="slide-fade"> /* Vue transition group that applies a transition effect */
+         <!-- Vue transition group that applies a transition effect -->
+        <transition-group name="slide-fade"> 
             <tr v-for="(product, index) in products" :key="index" class="product">
-                <td class="product-name">{{ product.name }}</td> /*  defines table data cells */
+                 <!-- defines table data cells -->
+                <td class="product-name">{{ product.name }}</td>
                 <td class="product-description">{{ product.description }}</td>
                 <td class="product-price">$ {{ product.price }}</td>
                 <td><button @click="editProduct(index)" class="edit-product">Edit</button></td>
